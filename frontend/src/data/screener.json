@@ -1,0 +1,38 @@
+[
+  {
+    "symbol": "AAPL",
+    "name": "Apple Inc.",
+    "sector": "Tech",
+    "price": 168.4,
+    "change": 1.25,
+    "volume": 12000000,
+    "marketCap": 2700000000000,
+    "pe": 28,
+    "week52High": 182.94,
+    "week52Low": 124.17
+  },
+  {
+    "symbol": "TSLA",
+    "name": "Tesla Inc.",
+    "sector": "Automobile",
+    "price": 210.8,
+    "change": -2.14,
+    "volume": 34000000,
+    "marketCap": 720000000000,
+    "pe": 55,
+    "week52High": 299.0,
+    "week52Low": 152.3
+  },
+  {
+    "symbol": "MSFT",
+    "name": "Microsoft Corp.",
+    "sector": "Tech",
+    "price": 305.2,
+    "change": 0.85,
+    "volume": 18000000,
+    "marketCap": 2300000000000,
+    "pe": 32,
+    "week52High": 315.0,
+    "week52Low": 210.5
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "id": 1,
+    "symbol": "AAPL",
+    "condition": "Price > 170",
+    "active": true
+  },
+  {
+    "id": 2,
+    "symbol": "TSLA",
+    "condition": "Price < 190",
+    "active": false
+  }
+]

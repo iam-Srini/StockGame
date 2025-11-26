@@ -1,0 +1,11 @@
+{
+  "name": "Guest",
+  "email": "guest@example.com",
+  "phone": "+1 234 567 8900",
+  "username": "newuser123",
+  "joined": "2025-11-25",
+  "currency": "USD",
+  "timezone": "America/Chicago",
+  "darkMode": false,
+  "notifications": true
+}

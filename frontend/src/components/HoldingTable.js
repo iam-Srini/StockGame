@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Container } from "react-bootstrap";
-import Card from "react-bootstrap/Card";
+import { Link } from "react-router-dom";
 import Table from "react-bootstrap/Table";
 
 // Import JSON data
@@ -69,7 +69,11 @@ function HoldingsTable() {
         <tbody>
           {processed.map((row, index) => (
             <tr key={index}>
-              <td>{row.symbol}</td>
+              <td>
+                    <Link to={`/stock/${row.symbol}`} style={{ textDecoration: "none" }}>
+                        {row.symbol}
+                    </Link>
+                </td>
               <td>{row.qty}</td>
               <td>${row.avg.toFixed(2)}</td>
               <td>${row.ltp.toFixed(2)}</td>
