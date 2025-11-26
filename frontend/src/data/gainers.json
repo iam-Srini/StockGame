@@ -1,0 +1,5 @@
+[
+  { "symbol": "AAPL", "change": "+3.2%" },
+  { "symbol": "TSLA", "change": "+2.7%" },
+  { "symbol": "MSFT", "change": "+1.9%" }
+]

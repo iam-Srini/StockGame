@@ -1,0 +1,6 @@
+[
+  { "symbol": "AAPL", "qty": 10, "avg": 150, "ltp": 165 },
+  { "symbol": "TSLA", "qty": 5, "avg": 210, "ltp": 190 },
+  { "symbol": "MSFT", "qty": 12, "avg": 280, "ltp": 300 },
+  { "symbol": "AMZN", "qty": 3, "avg": 100, "ltp": 120 }
+]
