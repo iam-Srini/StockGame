@@ -1,0 +1,26 @@
+watchlist = [
+  {
+    "symbol": "AAPL",
+    "name": "Apple Inc.",
+    "ltp": 168.4,
+    "change": 1.25,
+    "dayHigh": 170.0,
+    "dayLow": 166.2
+  },
+  {
+    "symbol": "TSLA",
+    "name": "Tesla Inc.",
+    "ltp": 210.8,
+    "change": -2.14,
+    "dayHigh": 218.0,
+    "dayLow": 209.1
+  },
+  {
+    "symbol": "MSFT",
+    "name": "Microsoft Corp.",
+    "ltp": 305.2,
+    "change": 0.85,
+    "dayHigh": 310.5,
+    "dayLow": 302.2
+  }
+]

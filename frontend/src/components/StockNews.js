@@ -1,7 +1,16 @@
-import news from "../data/StockNews.json";
+import { useState, useEffect } from "react";
+import axios from "axios";
 
 function StockNews({ symbol }) {
-  const newsList = news[symbol.toUpperCase()];
+  const [newsList, setnews] = useState([]);
+
+  useEffect(()=>{
+    async function fetch_stk_news() {
+      const {data} = await axios.get(`http://127.0.0.1:8000/news/${symbol}`);
+      setnews(data);
+    }
+    fetch_stk_news();
+  }, [])
 
   if (!newsList || newsList.length === 0) return null;
 

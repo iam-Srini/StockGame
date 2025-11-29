@@ -1,13 +1,23 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Container, Table, Row, Col, Button, Form } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 // Import JSON data
-import initialWatchlistData from "../data/watchlist.json";
 
 function Watchlist() {
-  const [watchlist, setWatchlist] = useState(initialWatchlistData);
+  const [watchlist, setWatchlist] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
+
+  useEffect(() => {
+    //fetch data from backend api
+    async function get_watchlistdata() {
+      const { data } = await axios.get("http://127.0.0.1:8000/watchlist/");
+      setWatchlist(data);
+    }
+    get_watchlistdata();
+  }
+  , []);
 
   // Handle search input
   const handleSearch = (e) => {

@@ -1,10 +1,22 @@
-import reportsData from '../data/StockReports.json';
+import axios from "axios";
+import { useState, useEffect } from "react";
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';  
 
 
+
 function StockReports({symbol}) {
-      const reports = reportsData[symbol.toUpperCase()];
+      const [reports, setreports] = useState([]);
+
+      useEffect(()=>{
+        async function fetch_reports() {
+          const {data} = await axios.get(`http://127.0.0.1:8000/reports/${symbol}`)
+          setreports(data)
+
+        }
+        fetch_reports();
+      }, [])
+
       return(
         <div className="p-3 mb-4 bg-light rounded">
         <h5>Financial Reports</h5>

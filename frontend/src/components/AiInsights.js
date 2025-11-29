@@ -1,7 +1,20 @@
-import insightsData from "../data/AiInsights.json";
+import axios from "axios";
+import { useState, useEffect } from "react";
+
+
 
 function AiInsights({ symbol }) {
-  const insights = insightsData[symbol.toUpperCase()];
+  const [insights, setinsights] = useState([]);
+
+  useEffect(()=>{
+    async function fetchinsights() {
+      const {data} = await axios.get(`http://127.0.0.1:8000/insights/${symbol}`);
+      setinsights(data);
+    }
+    fetchinsights();
+  },
+  []);
+
 
   if (!insights) return null;
 
