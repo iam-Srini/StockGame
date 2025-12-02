@@ -1,6 +1,7 @@
 // React & Router
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import axios from "axios";
 
 // UI Framework
 import { Container, Row, Col, Button } from "react-bootstrap";
@@ -24,7 +25,7 @@ import StockReports from "../components/StockReports";
 
 //JSON Data
 import screenerData from "../data/screener.json";
-import chartData from "../data/Stockcharts.json";
+
 
 // Register Chart Components
 ChartJS.register(
@@ -43,20 +44,45 @@ function StockDetails() {
   const { symbol } = useParams();
   const [timeframe, setTimeframe] = useState("1D");
   const [indicator, setIndicator] = useState("regular"); 
+  const [chartData, setChartData] = useState(null);
 
   const stock = screenerData.find(
     (s) => s.symbol.toUpperCase() === symbol.toUpperCase()
   );
 
-  const charts = chartData[symbol.toUpperCase()];
+ useEffect(() => {
+    async function fetchStockChartData() {
+      try {
+        const { data } = await axios.get(`http://127.0.0.1:8000/stock/${symbol}`);
+        setChartData(data);
+      } catch (err) {
+        console.error("Error fetching chart data:", err);
+      }
+    }
 
-  if (!stock || !charts || !charts[timeframe]) {
-    return (
-      <Container className="mt-4">
-        <h3>No Data Found for {symbol}</h3>
-      </Container>
-    );
-  }
+    fetchStockChartData();
+  }, [symbol]);
+
+// Still loading
+if (!chartData) {
+  return (
+    <Container className="mt-4">
+      <h3>Loading chart...</h3>
+    </Container>
+  );
+}
+
+const charts = chartData;
+
+// No timeframe data
+if (!charts[timeframe]) {
+  return (
+    <Container className="mt-4">
+      <h3>No Data Found for {symbol}</h3>
+    </Container>
+  );
+}
+
 
   // ===============================
   // 🔵 PRICE CHART DATASETS
@@ -137,7 +163,7 @@ const priceColor = isPositive ? "#16c784" : "#ea3943"; // green / red
 
             {/* Timeframe Buttons */}
             <div className="mb-2">
-              {["1D", "1W", "1M", "3M", "1Y", "ALL"].map((tf) => (
+              {["1D", "1W", "1M", "3M", "1Y", "5Y"].map((tf) => (
                 <Button
                   key={tf}
                   size="sm"
