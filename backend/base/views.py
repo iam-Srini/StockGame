@@ -1,12 +1,10 @@
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from .stockdata import Stk_data
 from .AiInsights_data import Stk_Insights
 from .stknews_data import Stk_news
-from .stkReports_data import Reports_Data
-from .models import Watchlist, StocksMaster, StockPriceHistory, CustomUser, StockTimeframeCache
+from .models import Watchlist, StocksMaster, StockPriceHistory, CustomUser, StockTimeframeCache, ScreenerResults, News
 from django.utils.timezone import now
-from .serializers import WatchlistItemSerializer, TimeFrameDataSerializer
+from .serializers import WatchlistItemSerializer, TimeFrameDataSerializer, ReportsDataSerializer, NewsDataSerializer
 
 
 # Create your views here.
@@ -37,7 +35,6 @@ def get_stock_data(request, stock_symbol):
     return Response(response_data) 
 
 
-
 @api_view(['GET'])
 def get_watchlist(request):
     user = CustomUser.objects.get(username="Guest")
@@ -64,13 +61,8 @@ def get_watchlist(request):
             "dayLow": float(latest.low_price),
         }
         response_data.append(item_data)
-        serializer = WatchlistItemSerializer(response_data, many=True)
+    serializer = WatchlistItemSerializer(response_data, many=True)
     return Response(serializer.data)
-
-
-
-
-
 
 @api_view(['GET'])
 def get_ai_insights(request, stock_symbol):
@@ -83,21 +75,23 @@ def get_ai_insights(request, stock_symbol):
 
 @api_view(['GET'])
 def get_stk_news(request, stock_symbol):
-    stknews = None
-    for news in Stk_news:
-        if stock_symbol in news:
-            stknews = news[stock_symbol]
-            break 
-    return Response(stknews) if news else Response({"error":"No Updates rightnow"}, status= 404)
+    try:
+        stock = StocksMaster.objects.get(symbol=stock_symbol)
+        news_data = News.objects.filter(symbol=stock).order_by("-published_at")
+        serializer = NewsDataSerializer(news_data, many=True)
+        return Response(serializer.data)
+    except StocksMaster.DoesNotExist:
+        return Response({"error": "Stock not found"}, status=404)
+
 
 @api_view(['GET'])
 def get_stk_reports(request, stock_symbol):
     stk_report = None
-    for report in Reports_Data:
-        if stock_symbol in report:
-            stk_report = report[stock_symbol]
-            break
-    return Response(stk_report) if stk_report else Response({"error":"Not Avilable"}, status = 404) 
+    stock = StocksMaster.objects.get(symbol = stock_symbol)
+    stk_object = ScreenerResults.objects.get(symbol = stock)
+    stk_report = stk_object.reports_json
+    serializer = ReportsDataSerializer(stk_report)
+    return Response(serializer.data) if stk_report else Response({"error":"Not Avilable"}, status = 404) 
 
 
 
