@@ -28,7 +28,7 @@ function StockNews({ symbol }) {
 
     {newsList?.map((item, idx) => (
       <div key={idx} className="mb-3">
-        <strong>{item.title}</strong>
+        <strong>{item.headline}</strong>
         <p className="mb-0 text-muted" style={{ fontSize: "0.9em" }}>
           {item.source} · {item.time}
         </p>

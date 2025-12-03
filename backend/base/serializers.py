@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import News
+from .models import News, Insights
 from django.utils.timezone import now
 
 
@@ -38,3 +38,14 @@ class NewsDataSerializer(serializers.ModelSerializer):
 
     def get_time(self, obj):
         return obj.published_at.strftime("%Y-%m-%d %H:%M:%S")
+    
+class AiInsightsDataSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Insights
+        fields = ["ai_insights"]
+
+    
+    
+    
+
+    

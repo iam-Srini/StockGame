@@ -4,14 +4,16 @@ import { useState, useEffect } from "react";
 
 
 function AiInsights({ symbol }) {
-  const [insights, setinsights] = useState([]);
+  const [insights, setinsights] = useState(null);
 
   useEffect(()=>{
     async function fetchinsights() {
       const {data} = await axios.get(`http://127.0.0.1:8000/insights/${symbol}`);
       setinsights(data);
+      console.log("AI INSIGHTS DATA:", data);
     }
     fetchinsights();
+
   },
   []);
 
@@ -32,10 +34,9 @@ function AiInsights({ symbol }) {
 
       <p className="text-muted">{insights.summary}</p>
 
-      {insights.ai_insights?.map((item, idx) => (
+      {insights?.map((item, idx) => (
         <div key={idx} className="mb-3">
-          <strong>{item.title}</strong>
-          <p className="mb-0">{item.detail}</p>
+          <p className="mb-0">{item.ai_insights}</p>
         </div>
       ))}
     </div>

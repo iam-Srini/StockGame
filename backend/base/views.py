@@ -1,10 +1,8 @@
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from .AiInsights_data import Stk_Insights
-from .stknews_data import Stk_news
-from .models import Watchlist, StocksMaster, StockPriceHistory, CustomUser, StockTimeframeCache, ScreenerResults, News
+from .models import Watchlist, StocksMaster, StockPriceHistory, CustomUser, StockTimeframeCache, ScreenerResults, News, Insights
 from django.utils.timezone import now
-from .serializers import WatchlistItemSerializer, TimeFrameDataSerializer, ReportsDataSerializer, NewsDataSerializer
+from .serializers import WatchlistItemSerializer, TimeFrameDataSerializer, ReportsDataSerializer, NewsDataSerializer, AiInsightsDataSerializer
 
 
 # Create your views here.
@@ -45,9 +43,10 @@ def get_watchlist(request):
         symbol = item.symbol
         stock = StocksMaster.objects.get(symbol = symbol)
         latest = StockPriceHistory.objects.filter(symbol = stock).order_by("-timestamp").first()
-
-        today_start = now().replace(hour=8, minute=30, second=0, microsecond=0)
-        first_candle = StockPriceHistory.objects.filter(symbol = stock, timestamp__gte=today_start).order_by("timestamp").first()
+        if latest:
+            latest_ts = latest.timestamp
+            today_start = latest_ts.replace(hour=8, minute=30, second=0, microsecond=0)
+            first_candle = StockPriceHistory.objects.filter(symbol = stock, timestamp__gte=today_start).order_by("timestamp").first()
         if not latest or not first_candle:
             continue
         change_percent = ((latest.close_price - first_candle.open_price)
@@ -66,12 +65,15 @@ def get_watchlist(request):
 
 @api_view(['GET'])
 def get_ai_insights(request, stock_symbol):
-    insights = None
-    for AiInsights in Stk_Insights:
-        if stock_symbol in AiInsights:
-            insights = AiInsights[stock_symbol]
-            break
-    return Response(insights) if insights else Response({"error": "No insights avialable"}, status=404)
+    stock = StocksMaster.objects.get(symbol=stock_symbol)
+
+    insights_qs = Insights.objects.filter(symbol=stock).order_by('-date')
+
+    if not insights_qs.exists():
+        return Response({"error": "No insights available"}, status=404)
+
+    serializer = AiInsightsDataSerializer(insights_qs, many=True)
+    return Response(serializer.data, status=200)
 
 @api_view(['GET'])
 def get_stk_news(request, stock_symbol):
