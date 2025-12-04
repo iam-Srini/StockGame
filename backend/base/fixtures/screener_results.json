@@ -1,0 +1,182 @@
+[
+  {
+    "model": "base.screenerresults",
+    "pk": 1,
+    "fields": {
+      "symbol": 1,
+      "name": "Apple Inc.",
+      "sector": "Technology",
+      "price": 171.20,
+      "change_percent": 1.45,
+      "volume": 68200000,
+      "market_cap": 2850000000000,
+      "pe_ratio": 28.30,
+      "week52_high": 198.23,
+      "week52_low": 143.12,
+      "reports_json": {"pe": 28.3, "eps": 6.12},
+      "updated_at": "2025-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "base.screenerresults",
+    "pk": 2,
+    "fields": {
+      "symbol": 2,
+      "name": "Microsoft Corporation",
+      "sector": "Technology",
+      "price": 412.50,
+      "change_percent": 0.88,
+      "volume": 26300000,
+      "market_cap": 3100000000000,
+      "pe_ratio": 35.20,
+      "week52_high": 430.12,
+      "week52_low": 324.80,
+      "reports_json": {"pe": 35.2, "eps": 9.15},
+      "updated_at": "2025-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "base.screenerresults",
+    "pk": 3,
+    "fields": {
+      "symbol": 3,
+      "name": "Amazon.com Inc.",
+      "sector": "Consumer Discretionary",
+      "price": 156.78,
+      "change_percent": 2.60,
+      "volume": 52100000,
+      "market_cap": 1600000000000,
+      "pe_ratio": 62.80,
+      "week52_high": 181.42,
+      "week52_low": 113.62,
+      "reports_json": {"pe": 62.8, "eps": 2.55},
+      "updated_at": "2025-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "base.screenerresults",
+    "pk": 4,
+    "fields": {
+      "symbol": 4,
+      "name": "Tesla Inc.",
+      "sector": "Automotive",
+      "price": 241.30,
+      "change_percent": -0.92,
+      "volume": 89500000,
+      "market_cap": 770000000000,
+      "pe_ratio": 72.10,
+      "week52_high": 299.12,
+      "week52_low": 157.23,
+      "reports_json": {"pe": 72.1, "eps": 3.02},
+      "updated_at": "2025-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "base.screenerresults",
+    "pk": 5,
+    "fields": {
+      "symbol": 5,
+      "name": "Alphabet Inc. (Class A)",
+      "sector": "Technology",
+      "price": 143.18,
+      "change_percent": 1.12,
+      "volume": 28900000,
+      "market_cap": 1870000000000,
+      "pe_ratio": 27.50,
+      "week52_high": 154.19,
+      "week52_low": 102.32,
+      "reports_json": {"pe": 27.5, "eps": 5.20},
+      "updated_at": "2025-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "base.screenerresults",
+    "pk": 6,
+    "fields": {
+      "symbol": 6,
+      "name": "Meta Platforms, Inc.",
+      "sector": "Technology",
+      "price": 327.40,
+      "change_percent": 3.80,
+      "volume": 34200000,
+      "market_cap": 840000000000,
+      "pe_ratio": 29.40,
+      "week52_high": 354.11,
+      "week52_low": 245.89,
+      "reports_json": {"pe": 29.4, "eps": 11.12},
+      "updated_at": "2025-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "base.screenerresults",
+    "pk": 7,
+    "fields": {
+      "symbol": 7,
+      "name": "NVIDIA Corporation",
+      "sector": "Semiconductors",
+      "price": 987.50,
+      "change_percent": 4.92,
+      "volume": 54100000,
+      "market_cap": 2460000000000,
+      "pe_ratio": 78.10,
+      "week52_high": 998.18,
+      "week52_low": 390.12,
+      "reports_json": {"pe": 78.1, "eps": 12.65},
+      "updated_at": "2025-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "base.screenerresults",
+    "pk": 8,
+    "fields": {
+      "symbol": 8,
+      "name": "JPMorgan Chase & Co.",
+      "sector": "Financials",
+      "price": 158.63,
+      "change_percent": 0.44,
+      "volume": 9120000,
+      "market_cap": 455000000000,
+      "pe_ratio": 11.30,
+      "week52_high": 170.15,
+      "week52_low": 123.50,
+      "reports_json": {"pe": 11.3, "eps": 14.02},
+      "updated_at": "2025-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "base.screenerresults",
+    "pk": 9,
+    "fields": {
+      "symbol": 9,
+      "name": "Netflix Inc.",
+      "sector": "Communication Services",
+      "price": 492.25,
+      "change_percent": -1.15,
+      "volume": 7200000,
+      "market_cap": 216000000000,
+      "pe_ratio": 42.50,
+      "week52_high": 525.10,
+      "week52_low": 312.65,
+      "reports_json": {"pe": 42.5, "eps": 8.32},
+      "updated_at": "2025-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "base.screenerresults",
+    "pk": 10,
+    "fields": {
+      "symbol": 10,
+      "name": "Advanced Micro Devices, Inc.",
+      "sector": "Semiconductors",
+      "price": 132.40,
+      "change_percent": 2.10,
+      "volume": 44800000,
+      "market_cap": 230000000000,
+      "pe_ratio": 54.80,
+      "week52_high": 164.98,
+      "week52_low": 92.63,
+      "reports_json": {"pe": 54.8, "eps": 2.15},
+      "updated_at": "2025-01-01T00:00:00Z"
+    }
+  }
+]

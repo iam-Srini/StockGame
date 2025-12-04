@@ -44,6 +44,9 @@ class AiInsightsDataSerializer(serializers.ModelSerializer):
         model = Insights
         fields = ["ai_insights"]
 
+class ChangePercentSerializer(serializers.Serializer):
+    symbol = serializers.CharField()
+    change_percent = serializers.CharField()
     
     
     

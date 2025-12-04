@@ -1,8 +1,7 @@
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .models import Watchlist, StocksMaster, StockPriceHistory, CustomUser, StockTimeframeCache, ScreenerResults, News, Insights
-from django.utils.timezone import now
-from .serializers import WatchlistItemSerializer, TimeFrameDataSerializer, ReportsDataSerializer, NewsDataSerializer, AiInsightsDataSerializer
+from .serializers import WatchlistItemSerializer, TimeFrameDataSerializer, ReportsDataSerializer, NewsDataSerializer, AiInsightsDataSerializer, ChangePercentSerializer
 
 
 # Create your views here.
@@ -94,6 +93,36 @@ def get_stk_reports(request, stock_symbol):
     stk_report = stk_object.reports_json
     serializer = ReportsDataSerializer(stk_report)
     return Response(serializer.data) if stk_report else Response({"error":"Not Avilable"}, status = 404) 
+
+@api_view(['GET'])
+def get_stk_gainers(request):
+    top_gainers = ScreenerResults.objects.order_by('-change_percent')[:3]
+
+    data = [
+        {
+            "symbol": g.symbol.symbol,
+            "change_percent": str(g.change_percent)
+        }
+        for g in top_gainers
+    ]
+
+    serializer = ChangePercentSerializer(data, many=True)
+    return Response(serializer.data)
+
+@api_view(['GET'])
+def get_stk_losers(request):
+    top_losers = ScreenerResults.objects.order_by('change_percent')[:3]
+
+    data = [
+        {
+            "symbol": l.symbol.symbol,
+            "change_percent": str(l.change_percent)
+        }
+        for l in top_losers
+    ]
+
+    serializer = ChangePercentSerializer(data, many=True)
+    return Response(serializer.data)
 
 
 
