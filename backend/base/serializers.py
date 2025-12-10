@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import News, Insights
+from .models import News, Insights, Holdings
 from django.utils.timezone import now
 
 
@@ -47,7 +47,12 @@ class AiInsightsDataSerializer(serializers.ModelSerializer):
 class ChangePercentSerializer(serializers.Serializer):
     symbol = serializers.CharField()
     change_percent = serializers.CharField()
-    
+
+class HoldingsDataSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Holdings
+        fields = "__all__"
+
     
     
 

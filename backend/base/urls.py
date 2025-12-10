@@ -11,4 +11,6 @@ urlpatterns = [
     path('reports/<str:stock_symbol>/', views.get_stk_reports, name = 'get_stk_reports'),
     path('gainers/',views.get_stk_gainers,name='get_stk_gainers'),
     path('losers/',views.get_stk_losers,name='get_stk_losers'),
+    path('holdings/',views.get_user_holdings, name='get_holdings'),
+
 ]
