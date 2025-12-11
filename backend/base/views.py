@@ -3,7 +3,7 @@ from rest_framework.response import Response
 from .models import Watchlist, StocksMaster, StockPriceHistory, CustomUser, StockTimeframeCache, \
     ScreenerResults, News, Insights, Holdings
 from .serializers import WatchlistItemSerializer, TimeFrameDataSerializer, ReportsDataSerializer, \
-    NewsDataSerializer, AiInsightsDataSerializer, ChangePercentSerializer, HoldingsDataSerializer
+    NewsDataSerializer, AiInsightsDataSerializer, ChangePercentSerializer, HoldingsSerializer
 
 
 
@@ -131,7 +131,7 @@ def get_stk_losers(request):
 @api_view(['GET'])
 def get_user_holdings(request):
     stk_holdings = Holdings.objects.filter(is_active = True)
-    serializer = HoldingsDataSerializer(stk_holdings, many = True)
+    serializer = HoldingsSerializer(stk_holdings, many = True)
     return Response(serializer.data)
 
 
