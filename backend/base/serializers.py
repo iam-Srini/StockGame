@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import News, Insights, Holdings, StockPriceHistory,StocksMaster
+from .models import News, Insights, Holdings, StockPriceHistory,StocksMaster, CustomUser, UserPreferences, ScreenerResults
 from django.utils.timezone import now
 
 
@@ -97,6 +97,56 @@ class HoldingsSerializer(serializers.ModelSerializer):
         invested = float(obj.quantity) * float(obj.avg_buy_price)
         current = float(latest) * float(obj.quantity)
         return current - invested
+
+
+class ProfileSerializer(serializers.ModelSerializer):
+    currency = serializers.SerializerMethodField()
+    timezone = serializers.SerializerMethodField()
+    darkmode = serializers.SerializerMethodField()
+    notifications = serializers.SerializerMethodField()
+    class Meta:
+        model = CustomUser
+        fields = ["first_name", "email", "phone", "username", "joined_at",
+                  "currency", "timezone", "darkmode", "notifications"]
+    
+    def get_currency(self, obj):
+        prefs = UserPreferences.objects.get(user = obj)
+        return prefs.currency
+    
+    def get_timezone(self, obj):
+        prefs = UserPreferences.objects.get(user = obj)
+        return prefs.timezone
+    
+    def get_darkmode(self, obj):
+        prefs = UserPreferences.objects.get(user = obj)
+        return prefs.dark_mode
+    
+    def get_notifications(self, obj):
+        prefs = UserPreferences.objects.get(user = obj)
+        return prefs.notifications_enabled
+    
+class ScreenerResultSerializer(serializers.ModelSerializer):
+    symbol = serializers.CharField(source="symbol.symbol") 
+    class Meta:
+        model = ScreenerResults
+        fields = [
+            "symbol",
+            "name",
+            "sector",
+            "price",
+            "change_percent",
+            "volume",
+            "market_cap",
+            "pe_ratio",
+            "week52_high",
+            "week52_low",
+            "reports_json",
+            "updated_at",
+        ]
+    
+
+
+    
 
     
 

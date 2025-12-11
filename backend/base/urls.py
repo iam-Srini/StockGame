@@ -12,5 +12,6 @@ urlpatterns = [
     path('gainers/',views.get_stk_gainers,name='get_stk_gainers'),
     path('losers/',views.get_stk_losers,name='get_stk_losers'),
     path('holdings/',views.get_user_holdings, name='get_holdings'),
-
+    path('myprofile/',views.get_user_profile, name='get_user_profile'),
+    path('screener/',views.get_screener_results, name='get_screener_results'),
 ]

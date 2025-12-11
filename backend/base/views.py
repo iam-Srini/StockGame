@@ -1,9 +1,10 @@
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .models import Watchlist, StocksMaster, StockPriceHistory, CustomUser, StockTimeframeCache, \
-    ScreenerResults, News, Insights, Holdings
+    ScreenerResults, News, Insights, Holdings, CustomUser
 from .serializers import WatchlistItemSerializer, TimeFrameDataSerializer, ReportsDataSerializer, \
-    NewsDataSerializer, AiInsightsDataSerializer, ChangePercentSerializer, HoldingsSerializer
+    NewsDataSerializer, AiInsightsDataSerializer, ChangePercentSerializer, HoldingsSerializer, ProfileSerializer,\
+    ScreenerResultSerializer
 
 
 
@@ -134,5 +135,20 @@ def get_user_holdings(request):
     serializer = HoldingsSerializer(stk_holdings, many = True)
     return Response(serializer.data)
 
+@api_view(['GET'])
+def get_user_profile(request):
+    try:
+        user = CustomUser.objects.get(username="Guest")
+        serializer = ProfileSerializer(user)
+        return Response(serializer.data)
+    except CustomUser.DoesNotExist:
+        return Response({"error": "User not found"}, status=404)
+    
+
+@api_view(['GET'])
+def get_screener_results(request):
+    screener_results = ScreenerResults.objects.all()
+    serializer = ScreenerResultSerializer(screener_results, many=True)
+    return Response(serializer.data)
 
 
